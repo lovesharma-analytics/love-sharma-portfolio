@@ -29,6 +29,16 @@
         .contact-pill span.text { color:#e5e7eb }
         input, textarea, select { outline:none }
         input:focus, textarea:focus, select:focus { box-shadow:0 0 0 2px rgba(167,139,250,0.5) }
+
+        /* Project image modal */
+        .img-modal-overlay { display:none; position:fixed; inset:0; z-index:100; background:rgba(0,0,0,0.85); backdrop-filter:blur(6px); align-items:center; justify-content:center; }
+        .img-modal-overlay.open { display:flex; }
+        .img-modal-inner { max-width:90vw; max-height:90vh; border-radius:16px; overflow:hidden; box-shadow:0 0 60px rgba(168,85,247,0.4); animation:modalIn 0.3s ease-out forwards; }
+        .img-modal-inner img { width:100%; height:100%; object-fit:contain; display:block; }
+
+        /* Dashboard preview card styles */
+        .project-img-thumb { width:100%; height:160px; object-fit:cover; border-radius:12px; margin-bottom:16px; cursor:pointer; transition:transform 0.3s ease, box-shadow 0.3s ease; border:1px solid rgba(255,255,255,0.1); }
+        .project-img-thumb:hover { transform:scale(1.03); box-shadow:0 8px 30px rgba(168,85,247,0.35); }
     </style>
     <script>tailwind.config={theme:{extend:{fontFamily:{poppins:['Poppins','sans-serif']}}}}</script>
 </head>
@@ -72,8 +82,6 @@
         <div class="text-xl md:text-2xl mb-6 animate-fade-in-up" style="animation-delay:0.2s">
             <span id="typed-text" class="text-purple-400 font-semibold"></span>
         </div>
-
-        <!-- Contact pills row — fully visible, wraps on small screens -->
         <div class="flex flex-wrap justify-center gap-2 mb-8 animate-fade-in-up" style="animation-delay:0.3s">
             <a href="mailto:lovesharma2520@gmail.com" class="contact-pill">
                 <span class="icon">@</span><span class="text">lovesharma2520@gmail.com</span>
@@ -90,7 +98,6 @@
                 <span class="text">India</span>
             </span>
         </div>
-
         <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed opacity-90 animate-fade-in-up" style="animation-delay:0.4s">
             Passionate Data Analyst specializing in <span class="text-purple-400 font-semibold">Business &amp; BI Analytics</span>.
             Transforming raw data into actionable business insights.
@@ -126,7 +133,7 @@
                     and delivering data-driven solutions.
                 </p>
                 <div class="grid grid-cols-2 gap-8 mb-12">
-                    <div><div class="text-3xl font-bold text-purple-400 mb-2" id="project-count">3+</div><div class="text-gray-400">Projects Completed</div></div>
+                    <div><div class="text-3xl font-bold text-purple-400 mb-2" id="project-count">4+</div><div class="text-gray-400">Projects Completed</div></div>
                     <div><div class="text-3xl font-bold text-purple-400 mb-2">7+</div><div class="text-gray-400">Core Skills</div></div>
                 </div>
             </div>
@@ -237,14 +244,13 @@
         <div class="text-center mb-12 scroll-animation">
             <h2 class="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">Featured Projects</h2>
             <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-8"></div>
-            <!-- ADD PROJECT BUTTON -->
             <button id="open-add-project" class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-full font-semibold text-base shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-purple-500/30">
                 <i class="fas fa-plus-circle"></i> Add Project
             </button>
         </div>
 
         <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Project 1 -->
+            <!-- Project 1: E-Commerce -->
             <div class="group relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 border border-white/10 hover:border-purple-500/50 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-purple-500/25 scroll-animation">
                 <div class="relative z-10">
                     <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -257,10 +263,14 @@
                         <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm font-medium border border-pink-500/30">Pandas</span>
                         <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-medium border border-blue-500/30">Zoho Analytics</span>
                     </div>
-                    <a href="https://github.com/lovesharma-analytics" target="_blank" class="inline-flex items-center text-purple-400 hover:text-purple-300 font-semibold group-hover:translate-x-2 transition-all duration-300">View Project <i class="fas fa-arrow-right ml-2"></i></a>
+                    <div class="flex gap-4">
+                        <a href="https://analytics.zoho.in/open-view/525231000000040419" target="_blank" class="inline-flex items-center text-purple-400 hover:text-purple-300 font-semibold group-hover:translate-x-2 transition-all duration-300">Live Dashboard <i class="fas fa-external-link-alt ml-2 text-sm"></i></a>
+                        <a href="https://github.com/lovesharma-analytics" target="_blank" class="inline-flex items-center text-gray-400 hover:text-gray-200 font-semibold transition-all duration-300"><i class="fab fa-github mr-2"></i>GitHub</a>
+                    </div>
                 </div>
             </div>
-            <!-- Project 2 -->
+
+            <!-- Project 2: Supply Chain -->
             <div class="group relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 border border-white/10 hover:border-purple-500/50 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-purple-500/25 scroll-animation" style="animation-delay:0.2s">
                 <div class="relative z-10">
                     <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -273,10 +283,14 @@
                         <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm font-medium border border-green-500/30">Excel</span>
                         <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-medium border border-blue-500/30">Zoho Analytics</span>
                     </div>
-                    <a href="https://github.com/lovesharma-analytics" target="_blank" class="inline-flex items-center text-purple-400 hover:text-purple-300 font-semibold group-hover:translate-x-2 transition-all duration-300">View Project <i class="fas fa-arrow-right ml-2"></i></a>
+                    <div class="flex gap-4">
+                        <a href="https://analytics.zoho.in/open-view/525231000000124542" target="_blank" class="inline-flex items-center text-purple-400 hover:text-purple-300 font-semibold group-hover:translate-x-2 transition-all duration-300">Live Dashboard <i class="fas fa-external-link-alt ml-2 text-sm"></i></a>
+                        <a href="https://github.com/lovesharma-analytics" target="_blank" class="inline-flex items-center text-gray-400 hover:text-gray-200 font-semibold transition-all duration-300"><i class="fab fa-github mr-2"></i>GitHub</a>
+                    </div>
                 </div>
             </div>
-            <!-- Project 3 -->
+
+            <!-- Project 3: Netflix -->
             <div class="group relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 border border-white/10 hover:border-purple-500/50 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-purple-500/25 scroll-animation" style="animation-delay:0.4s">
                 <div class="relative z-10">
                     <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -289,7 +303,57 @@
                         <span class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm font-medium border border-orange-500/30">Matplotlib</span>
                         <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-medium border border-blue-500/30">Pandas</span>
                     </div>
-                    <a href="https://github.com/lovesharma-analytics" target="_blank" class="inline-flex items-center text-purple-400 hover:text-purple-300 font-semibold group-hover:translate-x-2 transition-all duration-300">View Project <i class="fas fa-arrow-right ml-2"></i></a>
+                    <div class="flex gap-4">
+                        <a href="https://analytics.zoho.in/open-view/525231000000058345" target="_blank" class="inline-flex items-center text-purple-400 hover:text-purple-300 font-semibold group-hover:translate-x-2 transition-all duration-300">Live Dashboard <i class="fas fa-external-link-alt ml-2 text-sm"></i></a>
+                        <a href="https://github.com/lovesharma-analytics" target="_blank" class="inline-flex items-center text-gray-400 hover:text-gray-200 font-semibold transition-all duration-300"><i class="fab fa-github mr-2"></i>GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ★ Project 4: Customer Sales Dashboard (Power BI) — NEW ★ -->
+            <div class="group relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 border border-yellow-500/30 hover:border-yellow-400/60 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-yellow-500/20 scroll-animation" style="animation-delay:0.6s">
+                <!-- NEW badge -->
+                <div class="absolute top-4 right-4 z-20">
+                    <span class="px-3 py-1 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">New</span>
+                </div>
+                <div class="relative z-10">
+                    <!-- Dashboard preview image — click to enlarge -->
+                    <img
+                        src="https://raw.githubusercontent.com/lovesharma-analytics/lovesharma-analytics/main/Customer_Sales_Dashboard.png"
+                        alt="Customer Sales Dashboard Preview"
+                        class="project-img-thumb"
+                        onerror="this.style.display='none'"
+                        onclick="openImgModal(this.src, 'Customer Sales Dashboard — Power BI')"
+                        title="Click to enlarge"
+                    />
+
+                    <div class="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <!-- Power BI icon (custom SVG) -->
+                        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8">
+                            <rect x="6"  y="8"  width="10" height="32" rx="2" fill="#fff"/>
+                            <rect x="19" y="14" width="10" height="26" rx="2" fill="#fff" opacity="0.85"/>
+                            <rect x="32" y="20" width="10" height="20" rx="2" fill="#fff" opacity="0.65"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Customer Sales Dashboard</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        An interactive Power BI dashboard analyzing <strong class="text-yellow-400">253.73M</strong> in total sales across <strong class="text-yellow-400">50K</strong> customers.
+                        Covers sales trends by year &amp; month, product category performance (Grocery, Electronics, Furniture, Clothing),
+                        gender-based segmentation, and city-level profit vs sales comparison — enabling data-driven business decisions.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm font-medium border border-yellow-500/30">Power BI</span>
+                        <span class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm font-medium border border-orange-500/30">DAX</span>
+                        <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm font-medium border border-green-500/30">Excel</span>
+                        <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-medium border border-blue-500/30">Data Modelling</span>
+                    </div>
+                    <div class="flex gap-4 flex-wrap">
+                        <a href="https://github.com/lovesharma-analytics" target="_blank" class="inline-flex items-center text-yellow-400 hover:text-yellow-300 font-semibold group-hover:translate-x-2 transition-all duration-300">View on GitHub <i class="fas fa-arrow-right ml-2"></i></a>
+                        <button onclick="openImgModal('https://raw.githubusercontent.com/lovesharma-analytics/lovesharma-analytics/main/Customer_Sales_Dashboard.png','Customer Sales Dashboard — Power BI')"
+                            class="inline-flex items-center text-gray-400 hover:text-white font-semibold transition-all duration-300">
+                            <i class="fas fa-expand-alt mr-2"></i>Preview
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -306,8 +370,6 @@
             </div>
             <h3 class="text-2xl font-bold text-white">Add New Project</h3>
         </div>
-
-        <!-- Form -->
         <div class="space-y-4">
             <div>
                 <label class="block text-sm font-semibold text-purple-300 mb-1">Project Title *</label>
@@ -352,6 +414,13 @@
     </div>
 </div>
 
+<!-- ═══ IMAGE PREVIEW MODAL ═══ -->
+<div id="img-modal" class="img-modal-overlay" onclick="closeImgModal(event)">
+    <div class="img-modal-inner">
+        <img id="img-modal-img" src="" alt="" />
+    </div>
+</div>
+
 <!-- ═══ SKILLS ═══ -->
 <section id="skills" class="py-32 px-4 bg-black/20">
     <div class="max-w-7xl mx-auto">
@@ -390,7 +459,8 @@
                 <h3 class="text-2xl font-bold mb-4 text-white">Matplotlib</h3>
                 <p class="text-gray-400">Data visualization &amp; plotting</p>
             </div>
-            <div class="text-center p-12 bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl border border-white/10 hover:border-yellow-500/50 hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-300 hover:-translate-y-2 scroll-animation" style="animation-delay:1.2s">
+            <!-- Power BI — highlighted -->
+            <div class="text-center p-12 bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl border border-yellow-500/40 hover:border-yellow-400/70 hover:shadow-2xl hover:shadow-yellow-500/15 transition-all duration-300 hover:-translate-y-2 scroll-animation" style="animation-delay:1.2s">
                 <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 mx-auto mb-6">
                     <rect x="6"  y="8"  width="10" height="32" rx="2" fill="#F2C811"/>
                     <rect x="19" y="14" width="10" height="26" rx="2" fill="#F2C811" opacity="0.85"/>
@@ -436,7 +506,7 @@
 <script>
     // Typed.js
     const typed = new Typed('#typed-text', {
-        strings: ['Data Analyst','Business Intelligence Expert','Dashboard Developer','Data Storyteller'],
+        strings: ['Data Analyst','Business Intelligence Expert','Dashboard Developer','Power BI Developer','Data Storyteller'],
         typeSpeed:50, backSpeed:30, loop:true, smartBackspace:true
     });
 
@@ -463,13 +533,31 @@
         });
     });
 
+    // ── IMAGE MODAL ──
+    function openImgModal(src, alt) {
+        const modal = document.getElementById('img-modal');
+        const img   = document.getElementById('img-modal-img');
+        img.src = src; img.alt = alt;
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeImgModal(e) {
+        if(e.target === document.getElementById('img-modal') || e.target === document.getElementById('img-modal-img')) {
+            document.getElementById('img-modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    }
+    document.addEventListener('keydown', e => {
+        if(e.key === 'Escape') { document.getElementById('img-modal').classList.remove('open'); document.body.style.overflow=''; }
+    });
+
     // ── ADD PROJECT MODAL ──
-    const modal       = document.getElementById('add-project-modal');
-    const openBtn     = document.getElementById('open-add-project');
-    const closeBtn    = document.getElementById('close-modal');
-    const saveBtn     = document.getElementById('save-project');
-    const grid        = document.getElementById('projects-grid');
-    const errorBox    = document.getElementById('proj-error');
+    const modal    = document.getElementById('add-project-modal');
+    const openBtn  = document.getElementById('open-add-project');
+    const closeBtn = document.getElementById('close-modal');
+    const saveBtn  = document.getElementById('save-project');
+    const grid     = document.getElementById('projects-grid');
+    const errorBox = document.getElementById('proj-error');
 
     const TAG_COLORS = [
         'bg-purple-500/20 text-purple-400 border-purple-500/30',
@@ -550,8 +638,6 @@
         grid.appendChild(card);
         updateCount();
         closeModal();
-
-        // Scroll to new card
         setTimeout(() => card.scrollIntoView({ behavior:'smooth', block:'center' }), 100);
     });
 
@@ -562,9 +648,9 @@
 </script>
 
 <script>
-    // Resume download — PDF embedded as base64
+    // Resume download
     (function(){
-        var b64="JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUiAvRjMgNCAwIFIKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YxIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKMyAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMiAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EtT2JsaXF1ZSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjMgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iago1IDAgb2JqCjw8Ci9Db250ZW50cyA5IDAgUiAvTWVkaWFCb3ggWyAwIDAgNTk1LjI3NTYgODQxLjg4OTggXSAvUGFyZW50IDggMCBSIC9SZXNvdXJjZXMgPDwKL0ZvbnQgMSAwIFIgL1Byb2NTZXQgWyAvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJIF0KPj4gL1JvdGF0ZSAwIC9UcmFucyA8PAoKPj4gCiAgL1R5cGUgL1BhZ2UKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL1BhZ2VNb2RlIC9Vc2VOb25lIC9QYWdlcyA4IDAgUiAvVHlwZSAvQ2F0YWxvZwo+PgplbmRvYmoKNyAwIG9iago8PAovQXV0aG9yIChhbm9ueW1vdXMpIC9DcmVhdGlvbkRhdGUgKEQ6MjAyNjA0MDkwNTMwMDgrMDAnMDAnKSAvQ3JlYXRvciAoYW5vbnltb3VzKSAvS2V5d29yZHMgKCkgL01vZERhdGUgKEQ6MjAyNjA0MDkwNTMwMDgrMDAnMDAnKSAvUHJvZHVjZXIgKFJlcG9ydExhYiBQREYgTGlicmFyeSAtIFwob3BlbnNvdXJjZVwpKSAKICAvU3ViamVjdCAodW5zcGVjaWZpZWQpIC9UaXRsZSAodW50aXRsZWQpIC9UcmFwcGVkIC9GYWxzZQo+PgplbmRvYmoKOCAwIG9iago8PAovQ291bnQgMSAvS2lkcyBbIDUgMCBSIF0gL1R5cGUgL1BhZ2VzCj4+CmVuZG9iago5IDAgb2JqCjw8Ci9GaWx0ZXIgWyAvQVNDSUk4NURlY29kZSAvRmxhdGVEZWNvZGUgXSAvTGVuZ3RoIDczOTUKPj4Kc3RyZWFtCkdhdUhQPkJBbXFETFUzQGthLypYUmg8b1puV0tmQE1rIWRqZXQwOlZTI1ZdW1ckQ1NgM3UiWTZubj4sKXI6ZzdkMj88JDRSPz5MMmIjUG5KTSpfPT5KLVBqOkM2Y1kjM3JGPkdWcHEyL3AmLEQpQnFtOyFQXWhtXlFnYEpYaltsMWhUIi8pUDNxWXBNPCs4SXRGZU8hNVA3SVJLLylhQERJSF9FL3FbRUheOkwnblVbQiVqJismQ2goKTt0Ii4tP2lkc1VkUDY8cms5ZUQ2NUxzSkk/RjxTUThZQjgqYFJgQGk5P28tOzVRU15YXEgqKDYsPC8wTXE6TzhDaD9ZPFFcZFhdNEVAQDZIZiUnO2xKZjgraCxTciRRaUMkT0lnZ01eKShNTUg0PXVLQEpSNTIjNHI1RmFcRGxeQ2hCYVdNKktLY3ApQ3RLbFg0a1UmPDlldExXVmBDUmw9IU5QaCxxLidaYFVpNipJZFVfKUspYlRDM1FmOmVJUWZXaHEncmg+ayM6OVZgU0cqI0grKywwWGZNPGprOnVWW1NHWUxrZCFiJVspYSwjOko+TWRlLzxoKmUwUjozITpZaGRuMig3Km9FJClpUy5LM2YlJT5vbi1wbUUxWUg7OVUtO1cmNiIzdFdZTGhwMjwjZGwlKlNlUGBHNXNTUT8nQ19gKWZhUSpiRGJeUnE+LitMJC9SY2NLZkUzZEQ6MldpXSpsI2pFI2RFbCVJJ0g3V2k7Njw1WjMldHQnJy48JVUiSEZsXGJaXFMxJVxEMilcVXBtYTo5QSZOQXAqb1tXYmEjLUNiIyZcS1BGdFNeKyRoKHBWWD5DJCNkQCxNIVdlL2taZCRldGtyVUstUCRcJEE+LiwwYitrSmMhN1JIODJva01FUGY7LVRHUzVVNkA7MkZedTMjM0xfUEQ6VyVjNXIsLVZwWCxiNl5OXmdBVFtNX0pzVltIVV9MKEJdXWpWKEZaNVJkT1s2aC9qSlloYCdCYyonX2MvKG43QGBqRVcnc2BnLEkwUms+bylfMGcvVy1TU1Y2P3BjQ2Y3TmBDIk4sY2NBRCEkdFk4KUBBUk5ZcD80LEs+Ji4zbUopVl9UV0YwT3FtTi4jWG8vMyomLk1RM0MpIkE6Q2Q8MTZHcy9JLT00MGoubixFQSpAKnFuJltRPm9nXGstLihDbGJbJD5cOEdDa2gsLU5ScTxyNDBvMjNtdSMnWUVZMTRmczI5WUpOTDlHVT42LDxvIWhsaSxONUorbTFVL0pvUDBaMS5mV19MdTJYbzxpIyFcJFxlMWYjLTxlUUd0LXU5YVxZUnQhRUxucDZiI1FAbU1Da1E0MVxjOSo5ZTlJSTdQK0pIMl1YciVzO3AoR3E0NmhzNmJVLDYlJi08KSY5YFRJcys6bj5EZkhZalphLEleISVEQSxuVkljPkc1YiohTzo2b1E5LiZkIiRrRlsyX109OWojbCxWRUVlUEMsX29CYmwrcSozMCNtXicmZTZaLCM0NEEyQm1xPiE2TUAkRkZwIis2TWVbVF9LUT9vXEtEIU9fNFAsWElhdWMwdVpSVkJGO15wOTlVTyo9VzU6MC9mI15jJyxnNDJBa3BlaD1ZOkw6bFkuVVdrKXRnPychPjlTRydSbG1MWyJgNi5XJiliUDtJLT4yQCc1X2VKIy1xSCU+W1MnWi41U2JoaDhoWSxiVUZuKXM4WUxKQCw7blorSmM8Z2FzczR1VCtfRCtQPEs0TWJNNFhfJ25NKnVjakw4IWluY3IhZUVySS5gK1kzTGIySVdzQ2M+SUNMcVdHQyJlbCxJJTBSaDZhVUMyN3IsZ1ojKExSZEtLJVc6PiZfbiRmYjVrK2Q5PlBpOGdMQHUhMG85ZkpWPC4+WitNOlZpRXJmPVUxPW1hTnJhXT5ubihSQWRILCRbLi5YUyVdaGNjLipqTDgoSCs0ZjcrXVdmdCUnIT5CUzFlVHV0MkErLkxOcWRwXT4kVVVrZU8xZigsR1tCJlYhbyY/Lz5LYk1QTmhgVz83IVBjKVRmJyZYSVphWUdgbmJhc2FgNVEqL2huUXIkW1ZVSyUhKUFKQkEtNStAKWs7WXQvWUdxTTRTOkUicF8zXz1MK0BvOVRdLWMuXypjPXU4VWVnOXBKbl1ZIipdQ289N3M7PGcvWXI7bkYrXCI1ODVPVWJDcHEpJDdtL04nazMuWC40QiIpYjg8LXAzZT04Jj9qN0JyWWRBdFVpLjdDPGZGUz0xUSs1aGlWRERcTDo7IW9BYyw+dUJaOTYwTjIrbDMxMEZiP0dsT10wZld1QFpJK0hscFQsR11scVlVc01AIWd0bzI4Si1sTFtNIyhzK2xVaTAiKDAlRG9fR0hiQzQ0UCs+VSloKjBMOkkjbCslY1AhdV85Uys7KmJvLzsjO3JNNCZvRDFfWjd1QCdPQmYrXDYtczhMLXVrYUIwXk1VX0FUXCItXmc7MTVqLz5gMi1MQjdbSzQzR3B1KzYmPkc6QVZHVWFLLCpHXSUrOEJVVCwpbiNhUm5MZCosJTVyJUwxXzBmQjQsVEEsYSRaUjBcdVAwJm8hPiIlJzEhV1pYP1s7Mys5NlxMZSxPUTg6ZiRnQidHRWZlajBqPVxkQlgmJF1gSTdBb2E5RjtRVStiTiVnQkkjcEw3RjckO1g5byJcVUomO2c5b1dGLDVrZjRxczpxbHQiQFQkKnNhSVJQNEEoTDA5bihtYyFHL2c1KXVAVEVMQzYiMjtwKEM1KFJSLEYuNGE8YUQqL2tIPDFQJyg9Z1hiRSQuOyRtYFs0YFQ8citlOTUpT3RsKXNAKnAwXTowJkozQ0JaPm0vWCtVIUFrPT5WSCZKOClRJyxyKCgoMWNbR11PQSZwYEliYllNLU5fSD9oWi5qW0loQUs7ZmpGKGwsTFFAZTdUNkAwTUIpMl9aPUBlbGlhXHFdcT4hSFpQWWlKSkZqZFJRJEhYYlNgcjMjVG8/QjRjRy5CXkxBMy0sM2owJDZwNlBBPTRKXmdPZjNpNGEmLGM8Ty8iaWA0SVVaVVgmXEoqPCRiNXVvOiJVaicwNTlISClyXU9gbVdtWGpWS2I+aS5LTWNiYmolYVEzRWEwJj5FJDA2bUgyMCw9czckOEkpLFRGXylWUl8odS1DME9say89S0pQS1NJZCxHP3BwZystbnFFPCRKa2w3WFlHckJUPUBjODkuRnBJVmQ6SiJiUEMuNlkhRz8lUEVKYjQ+YEA6RixoLkVpQClcOTg2R1w7TjhWUXNBQDZ0aUE2NCZRJkJCYk5vZXEiLT0/KCJOWUskMFx1UXFfVzU+JiM0TyYxMUBhNyZbbUw3JitrMHFTNkhSYmlaRERgKF9XJGtMbSYuXG05ZUhMRDosZVpmKTEucWVmP2lPNUkxPSFfNmdVYTR1SThPQ3ROZyRwZSchNEk1TEc1dUNDSTlsWkxPIm4vNmYrdVRKSTZFQSUsKDNVXiUkJ2JmUkRpLiEkYlJWZy83LG10UiZedHJXYDpQJm5TcUxiKCFnbl8vUEJZTVM6PlhBNiZqOUlyZTQ2UTdoLCtiRkdDOC9yPFMpP0lCQCNISCNeS0doNihzIzM/Pks9dS5FJlkhPHFtKTM8cylKPkNwbFRiNkBoUTQiWjYlQzc3U2hQSSY8IlVBLkZTTFAwQTYnKSRmRChRNmpRViItR3RQJlckUmFKO2dkRGJXYl5LKVVsLU06K0VaajtdPkkqR1xGUDM/NW0sM1RybFAvQCsmSmc4S2tYNDhJKSg5W3M6SClLLjUxLjdiQj0pQFQkVHI4SERRMkIkbF9PKmhTajIyNDcmJTIiI0duJHRqcU1GIlA3XkpCNE86TGUzMDpcMFRgXkZKJkRETlZWO2kjdTgvQSwqKmZCNUY1Ky0/bSZSLiQ4dCc+V2VEcjFfJ10jWi8uPWxlTyI1O3Fsa11yNC5CcG1qSjBwJlhrZj0na2NZVG5VYmJnIy9FZDk4a2s/bmJbTjhbVEErTDNGPUBULVloMkcmJyNoa3RwLEpQRzs6ZUM7XF5SOWhQYjdlMkldSFUyWDZHSG5wV0RRYlM9LGtsY0FWYSNQJnBVQD1aY1tZZl1nVTtCNUROY1coalVjQSUmZXFkIl5UTVNxPCZUTD1CPnJCVSJGbT5SJUx1Vz9EL1NbSmhsNlRFXiRZOlZwRVFiMD9KallMYnBLTUYjUEg4YURyLzUtalVdW1lzNDk9VWRLNjsrJGxbLk1GQ1ZxYkcrWWNNPCt0JDQ+SkhpdWRXZnRNKnEiajNjOW5jRlYwY1hYIUdBSD85XDlpMEosU3JvTF0pLEM2XT0vX28/L0I1MDk4ZV1pcjdjaDtkU2dvcmBPMDRpdEZwUlw2PStscnI4dTpsPlRlMjMhYGlBRTlzWHFmRjFkLEIiV2kxX1gwXmhILDBnJnFkJG0+OjZvWmxDZUtSbC1qRmFjW0ZJSlxvak49UlRxc0EiW3NlOj5tZVVdVWovaU0mQmppS1FDUFpUNzUtcVtPOmttRWIkKzZycVJzczdTNWpJJSJuK3NaM0RsY1xhO2VuMlFQTD1QNkMhdTVoWztSXEM8aTZcJFsxV2hfcyErV1IxUCpjN0Jbc2oiWGcjcUs8cF5RKDAvaGNrcFFiU2oyO1pvLmVXZE9VaDZxMFRnRDpZUj5qRS44TVNcYWRTMU48XWpnZzVnbzY7UFxOQ1QnZ1tBW0xcQyhpbUtlS3RBSUFcZzwoL05vKExQSWReSEhDMGNLUnQzNTUvaEhOUCtQc1g3UVQ9XWZmZzU6YWFONyhkMTdKRkhoT1dqRWc3I2xsYGFFQUdAVjpsMjlQXWkqWU9POlMqbGpnZ0pYIVwjPmk3KXNZXkVULVhpKj4+P1w6KloqUy1CXiFSIU1sQTBaMlU9RjEqQ3FDRi02LCQuNGQlKlQmcDonY2AnW0s7blcraTJSXzZWamkyZ3VWXGsnc2FwYEI5Ii1yUCxGOjZnbGFdL2FmLUhVLF1zdF1AJzEzMkwqJytKS1hDa2lsM0onUTBjJGA1a3NRUVZec2tlSVI1ZiVda1tsWEBCLFhcKVVxJSZdI1o4VlpGIW4yKjopJEc9NU9tNUFnRSVcb2VVdSY6Omo3MFJHYXU+Yjxua1cvOEtSOkFBVSlRS2FNVWBMKjA4ZVoxQ2U9VUgiIWc/TGNpXEU0RnRgdUInR0VdZWo1QmZcZEo6UyVGLUo4YF4xI3RoQS5rJyNcIV08J0RzUiNxJzUsbGkuOFhEZnQjN0ZJOW5IUnI7OT1fKEo8OzkmJURFamsuSTcmalA8RE9pVVhCVSpqNVBaJWMkQlZsJz1yLUFEdU5VIlJwa0tVLnBbOUxzSzEuXDNjUC1ATWxAbHJKcls8a185YWomaUFLOCZ1MjpGU1dRcDA6VS9WTmRYY0QtaTs7RFRhLEsuY2ElTHFBcWtiQjZlYCRKLkhBRDckKmJyRTQyLWs1QG4xJUllXHIic1UjaDxrS2VfVG0wL2swXk9fcTtscWU1XnAkNFoqLTpmcEFCOEFfKVM0TlhIYVc5XDJKUyJjXiVSQ1UtOU8yQm47VEhBWFsrOFc6bVI4TD8kNmdZYDYzUUB1KEpHOHRrPykzSVZAO2xrOC9GQz0iKzlVW15jTUs2azdvQld0LFMiJDpoPGIkVWlJRzctRm1IYDU8aCNYYypFXURTJzQqWT9dRDVhTS8jQz1vWEZIPnFrcFhLTl1jamVrdFNeK0hfUU9FKSNPX0JYbF1BdDVDOkBBPWouakg3O1VTaW5eUC9QRihTdGxpN2NTUSo/UXEuaUgmN0k1TWEuIVo0KkJoQjE3bkVzWlhcJ1c1M2NpYmJtOVNPN2hYMGZ1LWY6JEBlS050R14uZ1syYy8mPyRJZ0EvayI8OW4oW0dGKnElRWA1Q2VYUzhTMVVMbFhFSVprMFdqZkg7ZSNEcEtATEctNF44XmVVR1hraTVHZF5fI0kuSmpGNm8zRGNpLVJsSzVTbTRgOjljcUM7aGBDN1E3IyJsRW9oUydrcFdlM05ePjgkKjcmJiQ3N2tvOD1FWUcxLyhQamZVQGZnaz5AMyEnOkpqIlBaTkFxWVArTEoqT3RlNEFnM2AlXzItWEVjamlBSSljU1NHJUoxKyk8TTo4biwvP1hbMUVGOkwwQDBOTUteP1xdJz44XCRrMHVoLWQyRVI4JTgsb24qOUg6JVNdUzQ9YkhxTTpjKE5NSk9aNUZoSiJAZ2xxYGRwKVctXjEyIUM1b3E2PTRPZ2VaXzZhRTcvL1MhXz5OSzVjJE8lVWJkJUdGQEo5M2lUU0pkaEBzRUpXL1A5RycsS3VhcExjcD02KmJPWiEia0d1RDglSycoQCNnIUs/IXVDSD5Aci4ocGddIVFAdVU0Lk47K1heNyxXWDJlbUwyZTdhbz4+XztFb0BDOGM6KCdiKDEwSi8zQTooQ1FhZlQsYFM6UHNJYClnI10sQDYiTldIOVopXmVYNz1HOSspXWVxK0cyJlM6KEIzLVU/XztKWEVeISVlQElNcTAoU0lSM1BWTzQlVHAhdUwwImsub2tiLmxGT0MqRW9LMCJTWi47NDE8LEhGO1RdVlJxNkpocGxlPTEzZyM0KEJRUEspQC1qZyckV1tSZnJ0Y1JkMURZXFhhRVpWcihtM01gUi8qZzRJXzRKIWhHaXAtWCgncmlcKF0nMXNYTnUmQyIsIUVvNjduRXNaWGlfaXBnVFw4W0VwMl1fSEc5SW5AME50NFczMlV1WmBFUHFEWSdlSlJcQDksZzFHXzNnWmo1YT0tKE0jcyRFb1dtLTpUNipMalpFclQxcFdeOWszQXBscldRSERoT0pSYSIiRk83ZGJIMlNaOSwlc1o4TVkqRVpCbkhDTERKVCNtRFJrL15uI25zcStLW0NpSzs7cywiOipBWio9Vi5Yc0tSJnJmITB0ME8tIXBLWkk4Wjw0ZHJdbmVOSD86MltTUlBML1FAQ3RSbixGPDsjdFIuODVGLHNhSSJCQ2xvayFqUk9vNVFuZFczZFAuSi9FLWBOJSRIVkBgIyIoXltALCxsZVw6ZSlAIihTcnAxOyRURENYSm08cERYZDFnYEI/SSU5YUZcPChpcjFhUmtrRmJNaz42L2MvJDhgRllEUTYnXWU1YSdLVDJAYVU8JFBWYWIoNmk7LDJGZWUwMUpAdVNOPi86KlxaJys6VWcsVlNGNGwmNUZjYls5LS0nVlEqTl8mbSo7XlBGVW87KiNBOGkzLCJeJWk1cCRJcS5HP2BBYmopNTNySkFuXHBQW2taaHEuakNOUWA9RT8mPjcrPk9sLlRUT142cE1fZFBbOEgxT1pCW15PXGJrJlVAXSdCOGhXQ3RIQlktLGxkZFcjXnBKOTBMZTA3TiVUJUtvUmVkXWM5PmlFWD01aHQtbSQiKkNcdUJtdTpjVjU8Ukk3P1BlX04sQTtLcWZEX3EuRmQ5ViljIUkvL0BWTzZdKmViRENcImZlKlpVIVYuUVxKaW5LM25qN3A2TG5iOklFNDdnVTdaY2YyL08kSCQ3IzJ0SFQtQ3M/ZFhjT1ZQKHVhakFHL0R0SHUvdUxnWGIyYFFNXDNvNVw+SEBXPltfKThGKCw4ZVZvLjdMT0VSVTJoaDlbMktPN2JDU2trU15cXkdKSSxQSTFvNGA6PGlobWtOSigjQD8za1NSWWFsP3ViX0sjMFszayFaclNEb2s5Vkg3QSppNStacz9PJCRAJCUqaTw4Sic0U19iOVUhMz1eamBWRDNiaUJvUj8xbkZsXGVISU4jVlZlJDk0Z3FDWmNkYyg5JTNNV2dOOFU6clJAPiwjP1tTOC0nRlpAaT9OOCopaTM1byJMSkdWN1VQVClQPkxoKmpGN3N0JSdvJE8hPm5ePnJYNWQxSiNMckZMbyhjMWxEVmUmdHVCJldnZVsodSFfcGhfKSplUzg/W1ZJPHRyMFQ0TyNKVUFBZCooRzZGPSEoaS5URyRdQVRrPW1AKkpHLjwyJVpvOzluZlhpK0hlPiM1JzBTQm9pSUBIJFs2WSExT21WXmctRSlpbl4ybGU8TDVERUkhZzZ1bm5XR2pubkY3O15HK05EYHRxOCpMQi0ySClAdERQck1NOUxuRCFlQC1xTzs6Pk1mbj1wQldabz8wdT4qcjlKYlJeK3RUPURcNkk4Yyg+LSQrVTM/LD89VDxFYmheX086XyVyLzZvR10sWkMqQz0zI1s7S0wlR3AiN0xHJWJaUzY7WDgwbDIrcjAwS19gUjUmKXErUi9MQkVpYT5NWG5fU0czSEV1QTJLTjJwaktgRDRIRyNrInVLXypfI185b104VjUrNnA9KzdVYmI6a2lDTEl0Zlc5XklvYDllXkdxOlFAUiZhQTk2b15nbFghNDVUQTtkMTBASjZDQWYjVk5QL0wsWTxEamV1dEcnV2syJHFSNz5pU3UxNkFNZkNVYmlsQk5mTChqIUQpVjhzWzxXMjpiNVlpazFaQy1WV1pVTl5AbSUsSWNALSsjKUVfbUMwQCVgKjlWQUs0IkVHckdgLk1bKGUsbHIpT2VKJmpxOis+OyU0JydkSGpaaFJyPDcpSkVydUQsS1I3TzA7MkVSZ1tNMDtmLSg3LSZeTXNCR1UqPz1ST04rIzpPQzldM2JXayshUVc3YlluZnNnL2RRQWtBQTdzOkU3Uz0jRV5xPDFaKz5mU0g2XiJSaWRhMjY3LTJOL1UxZjRnPGB0KEk1V0syPGVOa2lgO0xOIzY7LmlmXFVAZC5fLFRwJk5aZVlmOFExV1FqZHBiM0ZURmpbWi9eSVAhK2lMR0RzQl1dZzdoQklNY05ScHM0L08vK0BcLDEuRHJLP0ZzNkFxbk4jVkU0KSJFR3JnVFAkZitaUkZMc2JsV2o3LTVxQ08qaGxOaWZGayRDQG5XJzUjYEBtZExDYiRbMVA2bUYpPEBjU0w+V0MqZCFtXkxkX2JCQTVac3ImUXVjISFhQ2cxdFI0cUJLTDE3PEIqZTllTmBEQ2dXJi86RStXNWovaEpnZDdGRGBPS3A4OVdBZEQjQnVqPGlzb3FONHVCb11DODlfRmsscnRTV19OPW9jZ0M4WDVBPilwISQyTy9zV2k8NV06aUUwViUiZF1CUGJXWCUjcU43PjcxUmcxNm0oOl9tZElgQTYwLSNyNEQ2JSMlPyFpVmpbSFIwZSdnaDRkYUM0TCRucVI/PDlvRy5QXTdSUkJRMGwlbUcyKkFPI1k4TkojaktXI2NhWF4iSWdVS0JSRklgLS5YLygyO2o3bUw0UUd0XV1wQDFUXm4xQzxUUyxfUCdvSUcuc0JUWWldJG44Kmw3TGVfR1NLWSVhSz1lWkdfKk1rUVRkPDdYYTJKT2J1Kks9T21EIzBpYGVoLDhlKmZTJF1JLjI5M0k1ZW5ZW3NFViY0bSZeX1chRCtcJUEzNCdKU0dXRyFOci1kbGw9WChZTi9kXjUjbVhzLkZvXV1cM2MmYWolQEorbShBUkNfKFFxVkJFZ21wMUlzT0g2Yzs1dTlmVSduQUleRklVQ2xPY1Q+V04yRWEjUTczTjMwUTtcYjstJ0FCL0s/PDQiWWJFJTFaOmxAJ2tIOyFlUyNqNCRRLCxIMDgzUUwuNEJpLDhzbUs2LktrcCxWLm5IPGksJGRXaWskXXFIYSZfUV9DKFRnbz0oS3BfNV0iL3VhbC9LU0YiYVo8XEoobG9PTyYyL3RKTk1FNFQzckRrXCdrcik9RHIpaF4/ckMoclMzPCZANS5QMl5WTEdValNKWCFyNGhtPz1lNUIsaVY/ckM/UkNWSmZuZzc3LytuaEdGMShyNGwlYV5IaFhrWzZhNTkpXGoyVUJGcnJAJXVdOlR+PmVuZHN0cmVhbQplbmRvYmoKeHJlZgowIDEwCjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDA2MSAwMDAwMCBuIAowMDAwMDAwMTEyIDAwMDAwIG4gCjAwMDAwMDAyMTkgMDAwMDAgbiAKMDAwMDAwMDMzMSAwMDAwMCBuIAowMDAwMDAwNDQ2IDAwMDAwIG4gCjAwMDAwMDA2NDkgMDAwMDAgbiAKMDAwMDAwMDcxNyAwMDAwMCBuIAowMDAwMDAwOTc4IDAwMDAwIG4gCjAwMDAwMDEwMzcgMDAwMDAgbiAKdHJhaWxlcgo8PAovSUQgCls8NmI2ZDNhZmEyMmUzMWJjNTI0OGVkMWM4NjNkOGM2Yzg+PDZiNmQzYWZhMjJlMzFiYzUyNDhlZDFjODYzZDhjNmM4Pl0KJSBSZXBvcnRMYWIgZ2VuZXJhdGVkIFBERiBkb2N1bWVudCAtLSBkaWdlc3QgKG9wZW5zb3VyY2UpCgovSW5mbyA3IDAgUgovUm9vdCA2IDAgUgovU2l6ZSAxMAo+PgpzdGFydHhyZWYKODUyMwolJUVPRgo=";
+        var b64="JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUiAvRjMgNCAwIFIKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YxIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKMyAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMiAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EtT2JsaXF1ZSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjMgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iago1IDAgb2JqCjw8Ci9Db250ZW50cyA5IDAgUiAvTWVkaWFCb3ggWyAwIDAgNTk1LjI3NTYgODQxLjg4OTggXSAvUGFyZW50IDggMCBSIC9SZXNvdXJjZXMgPDwKL0ZvbnQgMSAwIFIgL1Byb2NTZXQgWyAvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJIF0KPj4gL1JvdGF0ZSAwIC9UcmFucyA8PAoKPj4gCiAgL1R5cGUgL1BhZ2UKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL1BhZ2VNb2RlIC9Vc2VOb25lIC9QYWdlcyA4IDAgUiAvVHlwZSAvQ2F0YWxvZwo+PgplbmRvYmoKNyAwIG9iago8PAovQXV0aG9yIChhbm9ueW1vdXMpIC9DcmVhdGlvbkRhdGUgKEQ6MjAyNjA0MDkwNTMwMDgrMDAnMDAnKSAvQ3JlYXRvciAoYW5vbnltb3VzKSAvS2V5d29yZHMgKCkgL01vZERhdGUgKEQ6MjAyNjA0MDkwNTMwMDgrMDAnMDAnKSAvUHJvZHVjZXIgKFJlcG9ydExhYiBQREYgTGlicmFyeSAtIFwob3BlbnNvdXJjZVwpKSAKICAvU3ViamVjdCAodW5zcGVjaWZpZWQpIC9UaXRsZSAodW50aXRsZWQpIC9UcmFwcGVkIC9GYWxzZQo+PgplbmRvYmoKOCAwIG9iago8PAovQ291bnQgMSAvS2lkcyBbIDUgMCBSIF0gL1R5cGUgL1BhZ2VzCj4+CmVuZG9iago5IDAgb2JqCjw8Ci9GaWx0ZXIgWyAvQVNDSUk4NURlY29kZSAvRmxhdGVEZWNvZGUgXSAvTGVuZ3RoIDczOTUKPj4Kc3RyZWFtCkdhdUhQPkJBbXFETFUzQGthLypYUmg8b1puV0tmQE1rIWRqZXQwOlZTI1ZdW1ckQ1NgM3UiWTZubj4sKXI6ZzdkMj88JDRSPz5MMmIjUG5KTSpfPT5KLVBqOkM2Y1kjM3JGPkdWcHEyL3AmLEQpQnFtOyFQXWhtXlFnYEpYaltsMWhUIi8pUDNxWXBNPCs4SXRGZU8hNVA3SVJLLylhQERJSF9FL3FbRUheOkwnblVbQiVqJismQ2goKTt0Ii4tP2lkc1VkUDY8cms5ZUQ2NUxzSkk/RjxTUThZQjgqYFJgQGk5P28tOzVRU15YXEgqKDYsPC8wTXE6TzhDaD9ZPFFcZFhdNEVAQDZIZiUnO2xKZjgraCxTciRRaUMkT0lnZ01eKShNTUg0PXVLQEpSNTIjNHI1RmFcRGxeQ2hCYVdNKktLY3ApQ3RLbFg0a1UmPDlldExXVmBDUmw9IU5QaCxxLidaYFVpNipJZFVfKUspYlRDM1FmOmVJUWZXaHEncmg+ayM6OVZgU0cqI0grKywwWGZNPGprOnVWW1NHWUxrZCFiJVspYSwjOko+TWRlLzxoKmUwUjozITpZaGRuMig3Km9FJClpUy5LM2YlJT5vbi1wbUUxWUg7OVUtO1cmNiIzdFdZTGhwMjwjZGwlKlNlUGBHNXNTUT8nQ19gKWZhUSpiRGJeUnE+LitMJC9SY2NLZkUzZEQ6MldpXSpsI2pFI2RFbCVJJ0g3V2k7Njw1WjMldHQnJy48JVUiSEZsXGJaXFMxJVxEMilcVXBtYTo5QSZOQXAqb1tXYmEjLUNiIyZcS1BGdFNeKyRoKHBWWD5DJCNkQCxNIVdlL2taZCRldGtyVUstUCRcJEE+LiwwYitrSmMhN1JIODJva01FUGY7LVRHUzVVNkA7MkZedTMjM0xfUEQ6VyVjNXIsLVZwWCxiNl5OXmdBVFtNX0pzVltIVV9MKEJdXWpWKEZaNVJkT1s2aC9qSlloYCdCYyonX2MvKG43QGBqRVcnc2BnLEkwUms+bylfMGcvVy1TU1Y2P3BjQ2Y3TmBDIk4sY2NBRCEkdFk4KUBBUk5ZcD80LEs+Ji4zbUopVl9UV0YwT3FtTi4jWG8vMyomLk1RM0MpIkE6Q2Q8MTZHcy9JLT00MGoubixFQSpAKnFuJltRPm9nXGstLihDbGJbJD5cOEdDa2gsLU5ScTxyNDBvMjNtdSMnWUVZMTRmczI5WUpOTDlHVT42LDxvIWhsaSxONUorbTFVL0pvUDBaMS5mV19MdTJYbzxpIyFcJFxlMWYjLTxlUUd0LXU5YVxZUnQhRUxucDZiI1FAbU1Da1E0MVxjOSo5ZTlJSTdQK0pIMl1YciVzO3AoR3E0NmhzNmJVLDYlJi08KSY5YFRJcys6bj5EZkhZalphLEleISVEQSxuVkljPkc1YiohTzo2b1E5LiZkIiRrRlsyX109OWojbCxWRUVlUEMsX29CYmwrcSozMCNtXicmZTZaLCM0NEEyQm1xPiE2TUAkRkZwIis2TWVbVF9LUT9vXEtEIU9fNFAsWElhdWMwdVpSVkJGO15wOTlVTyo9VzU6MC9mI15jJyxnNDJBa3BlaD1ZOkw6bFkuVVdrKXRnPychPjlTRydSbG1MWyJgNi5XJiliUDtJLT4yQCc1X2VKIy1xSCU+W1MnWi41U2JoaDhoWSxiVUZuKXM4WUxKQCw7blorSmM8Z2FzczR1VCtfRCtQPEs0TWJNNFhfJ25NKnVjakw4IWluY3IhZUVySS5gK1kzTGIySVdzQ2M+SUNMcVdHQyJlbCxJJTBSaDZhVUMyN3IsZ1ojKExSZEtLJVc6PiZfbiRmYjVrK2Q5PlBpOGdMQHUhMG85ZkpWPC4+WitNOlZpRXJmPVUxPW1hTnJhXT5ubihSQWRILCRbLi5YUyVdaGNjLipqTDgoSCs0ZjcrXVdmdCUnIT5CUzFlVHV0MkErLkxOcWRwXT4kVVVrZU8xZigsR1tCJlYhbyY/Lz5LYk1QTmhgVz83IVBjKVRmJyZYSVphWUdgbmJhc2FgNVEqL2huUXIkW1ZVSyUhKUFKQkEtNStAKWs7WXQvWUdxTTRTOkUicF8zXz1MK0BvOVRdLWMuXypjPXU4VWVnOXBKbl1ZIipdQ289N3M7PGcvWXI7bkYrXCI1ODVPVWJDcHEpJDdtL04nazMuWC40QiIpYjg8LXAzZT04Jj9qN0JyWWRBdFVpLjdDPGZGUz0xUSs1aGlWRERcTDo7IW9BYyw+dUJaOTYwTjIrbDMxMEZiP0dsT10wZld1QFpJK0hscFQsR11scVlVc01AIWd0bzI4Si1sTFtNIyhzK2xVaTAiKDAlRG9fR0hiQzQ0UCs+VSloKjBMOkkjbCslY1AhdV85Uys7KmJvLzsjO3JNNCZvRDFfWjd1QCdPQmYrXDYtczhMLXVrYUIwXk1VX0FUXCItXmc7MTVqLz5gMi1MQjdbSzQzR3B1KzYmPkc6QVZHVWFLLCpHXSUrOEJVVCwpbiNhUm5MZCosJTVyJUwxXzBmQjQsVEEsYSRaUjBcdVAwJm8hPiIlJzEhV1pYP1s7Mys5NlxMZSxPUTg6ZiRnQidHRWZlajBqPVxkQlgmJF1gSTdBb2E5RjtRVStiTiVnQkkjcEw3RjckO1g5byJcVUomO2c5b1dGLDVrZjRxczpxbHQiQFQkKnNhSVJQNEEoTDA5bihtYyFHL2c1KXVAVEVMQzYiMjtwKEM1KFJSLEYuNGE8YUQqL2tIPDFQJyg9Z1hiRSQuOyRtYFs0YFQ8citlOTUpT3RsKXNAKnAwXTowJkozQ0JaPm0vWCtVIUFrPT5WSCZKOClRJyxyKCgoMWNbR11PQSZwYEliYllNLU5fSD9oWi5qW0loQUs7ZmpGKGwsTFFAZTdUNkAwTUIpMl9aPUBlbGlhXHFdcT4hSFpQWWlKSkZqZFJRJEhYYlNgcjMjVG8/QjRjRy5CXkxBMy0sM2owJDZwNlBBPTRKXmdPZjNpNGEmLGM8Ty8iaWA0SVVaVVgmXEoqPCRiNXVvOiJVaicwNTlISClyXU9gbVdtWGpWS2I+aS5LTWNiYmolYVEzRWEwJj5FJDA2bUgyMCw9czckOEkpLFRGXylWUl8odS1DME9say89S0pQS1NJZCxHP3BwZystbnFFPCRKa2w3WFlHckJUPUBjODkuRnBJVmQ6SiJiUEMuNlkhRz8lUEVKYjQ+YEA6RixoLkVpQClcOTg2R1w7TjhWUXNBQDZ0aUE2NCZRJkJCYk5vZXEiLT0/KCJOWUskMFx1UXFfVzU+JiM0TyYxMUBhNyZbbUw3JitrMHFTNkhSYmlaRERgKF9XJGtMbSYuXG01ZUhMRDosZVpmKTEucWVmP2lPNUkxPSFfNmdVYTR1SThPQ3ROZyRwZSchNEk1TEc1dUNDSTlsWkxPIm4vNmYrdVRKSTZFQSUsKDNVXiUkJ2JmUkRpLiEkYlJWZy83LG10UiZedHJXYDpQJm5TcUxiKCFnbl8vUEJZTVM6PlhBNiZqOUlyZTQ2UTdoLCtiRkdDOC9yPFMpP0lCQCNISCNeS0doNihzIzM/Pks9dS5FJlkhPHFtKTM8cylKPkNwbFRiNkBoUTQiWjYlQzc3U2hQSSY8IlVBLkZTTFAwQTYnKSRmRChRNmpRViItR3RQJlckUmFKO2dkRGJXYl5LKVVsLU06K0VaajtdPkkqR1xGUDM/NW0sM1RybFAvQCsmSmc4S2tYNDhJKSg1W3M6SClLLjUxLjdiQj0pQFQkVHI4SERRMkIkbF9PKmhTajIyNDcmJTIiI0duJHRqcU1GIlA3XkpCNE86TGUzMDpcMFRgXkZKJkRETlZWO2kjdTgvQSwqKmZCNUY1Ky0/bSZSLiQ4dCc+V2VEcjFfJ10jWi8uPWxlTyI1O3Fsa11yNC5CcG1qSjBwJlhrZj0na2NZVG5VYmJnIy9FZDk4a2s/bmJbTjhbVEErTDNGPUBULVloMkcmJyNoa3RwLEpQRzs6ZUM7XF5SOWhQYjdlMkldSFUyWDZHSG5wV0RRYlM9LGtsY0FWYSNQJnBVQD1aY1tZZl1nVTtCNUROY1coalVjQSUmZXFkIl5UTVNxPCZUTD1CPnJCVSJGbT5SJUx1Vz9EL1NbSmhsNlRFXiRZOlZwRVFiMD9KallMYnBLTUYjUEg4YURyLzUtalVdW1lzNDk9VWRLNjsrJGxbLk1GQ1ZxYkcrWWNNPCt0JDQ+SkhpdWRXZnRNKnEiajNjOW5jRlYwY1hYIUdBSD85XDlpMEosU3JvTF0pLEM2XT0vX28/L0I1MDk4ZV1pcjdjaDtkU2dvcmBPMDRpdEZwUlw2PStscnI4dTpsPlRlMjMhYGlBRTlzWHFmRjFkLEIiV2kxX1gwXmhILDBnJnFkJG0+OjZvWmxDZUtSbC1qRmFjW0ZJSlxvak49UlRxc0EiW3NlOj5tZVVdVWovaU0mQmppS1FDUFpUNzUtcVtPOmttRWIkKzZycVJzczdTNWpJJSJuK3NaM0RsY1xhO2VuMlFQTD1QNkMhdTVoWztSXEM8aTZcJFsxV2hfcyErV1IxUCpjN0Jbc2oiWGcjcUs8cF5RKDAvaGNrcFFiU2oyO1pvLmVXZE9VaDZxMFRnRDpZUj5qRS44TVNcYWRTMU48XWpnZzVnbzY7UFxOQ1QnZ1tBW0xcQyhpbUtlS3RBSUFcZzwoL05vKExQSWReSEhDMGNLUnQzNTUvaEhOUCtQc1g3UVQ9XWZmZzU6YWFONyhkMTdKRkhoT1dqRWc3I2xsYGFFQUdAVjpsMjlQXWkqWU9POlMqbGpnZ0pYIVwjPmk3KXNZXkVULVhpKj4+P1w6KloqUy1CXiFSIU1sQTBaMlU9RjEqQ3FDRi02LCQuNGQlKlQmcDonY2AnW0s7blcraTJSXzZWamkyZ3VWXGsnc2FwYEI5Ii1yUCxGOjZnbGFdL2FmLUhVLF1zdF1AJzEzMkwqJytKS1hDa2lsM0onUTBjJGA1a3NRUVZec2tlSVI1ZiVda1tsWEBCLFhcKVVxJSZdI1o4VlpGIW4yKjopJEc9NU9tNUFnRSVcb2VVdSY6Omo3MFJHYXU+Yjxua1cvOEtSOkFBVSlRS2FNVWBMKjA4ZVoxQ2U9VUgiIWc/TGNpXEU0RnRgdUInR0VdZWo1QmZcZEo6UyVGLUo4YF4xI3RoQS5rJyNcIV08J0RzUiNxJzUsbGkuOFhEZnQjN0ZJOW5IUnI7OT1fKEo8OzkmJURFamsuSTcmalA8RE9pVVhCVSpqNVBaJWMkQlZsJz1yLUFEdU5VIlJwa0tVLnBbOUxzSzEuXDNjUC1ATWxAbHJKcls8a185YWomaUFLOCZ1MjpGU1dRcDA6VS9WTmRYY0QtaTs7RFRhLEsuY2ElTHFBcWtiQjZlYCRKLkhBRDckKmJyRTQyLWs1QG4xJUllXHIic1UjaDxrS2VfVG0wL2swXk9fcTtscWU1XnAkNFoqLTpmcEFCOEFfKVM0TlhIYVc5XDJKUyJjXiVSQ1UtOU8yQm47VEhBWFsrOFc6bVI4TD8kNmdZYDYzUUB1KEpHOHRrPykzSVZAO2xrOC9GQz0iKzlVW15jTUs2azdvQld0LFMiJDpoPGIkVWlJRzctRm1IYDU8aCNYYypFXURTJzQqWT9dRDVhTS8jQz1vWEZIPnFrcFhLTl1damVrdFNeK0hfUU9FKSNPX0JYbF1BdDVDOkBBPWouakg3O1VTaW5eUC9QRihTdGxpN2NTUSo/UXEuaUgmN0k1TWEuIVo0KkJoQjE3bkVzWlhcJ1c1M2NpYmJtOVNPN2hYMGZ1LWY6JEBlS050R14uZ1syYy8mPyRJZ0EvayI8OW4oW0dGKnElRWA1Q2VYUzhTMVVMbFhFSVprMFdqZkg7ZSNEcEtATEctNF44XmVVR1hraTVHZF5fI0kuSmpGNm8zRGNpLVJsSzVTbTRgOjljcUM7aGBDN1E3IyJsRW9oUydrcFdlM05ePjgkKjcmJiQ3N2tvOD1FWUcxLyhQamZVQGZnaz5AMyEnOkpqIlBaTkFxWVArTEoqT3RlNEFnM2AlXzItWEVjamlBSSljU1NHJUoxKyk8TTo4biwvP1hbMUVGOkwwQDBOTUteP1xdJz44XCRrMHVoLWQyRVI4JTgsb24qOUg6JVNdUzQ9YkhxTTpjKE5NSk9aNUZoSiJAZ2xxYGRwKVctXjEyIUM1b3E2PTRPZ2VaXzZhRTcvL1MhXz5OSzVjJE8lVWJkJUdGQEo5M2lUU0pkaEBzRUpXL1A5RycsS3VhcExjcD02KmJPWiEia0d1RDglSycoQCNnIUs/IXVDSD5Aci4ocGddIVFAdVU0Lk47K1heNyxXWDJlbUwyZTdhbz4+XztFb0BDOGM6KCdiKDEwSi8zQTooQ1FhZlQsYFM6UHNJYClnI10sQDYiTldIOVopXmVYNz1HOSspXWVxK0cyJlM6KEIzLVU/XztKWEVeISVlQElNcTAoU0lSM1BWTzQlVHAhdUwwImsub2tiLmxGT0MqRW9LMCJTWi47NDE8LEhGO1RdVlJxNkpocGxlPTEzZyM0KEJRUEspQC1qZyckV1tSZnJ0Y1JkMURZXFhhRVpWcihtM01gUi8qZzRJXzRKIWhHaXAtWCgncmlcKF0nMXNYTnUmQyIsIUVvNjduRXNaWGlfaXBnVFw4W0VwMl1fSEc5SW5AME50NFczMlV1WmBFUHFEWSdlSlJcQDksZzFHXzNnWmo1YT0tKE0jcyRFb1dtLTpUNipMalpFclQxcFdeOWszQXBscldRSERoT0pSYSIiRk83ZGJIMlNaOSwlc1o4TVkqRVpCbkhDTERKVCNtRFJrL15uI25zcStLW0NpSzs7cywiOipBWio9Vi5Yc0tSJnJmITB0ME8tIXBLWkk4Wjw0ZHJdbmVOSD86MltTUlBML1FAQ3RSbixGPDsjdFIuODVGLHNhSSJCQ2xvayFqUk9vNVFuZFczZFAuSi9FLWBOJSRIVkBgIyIoXltALCxsZVw6ZSlAIihTcnAxOyRURENYSm08cERYZDFnYEI/SSU5YUZcPChpcjFhUmtrRmJNaz42L2MvJDhgRllEUTYnXWU1YSdLVDJAYVU8JFBWYWIoNmk7LDJGZWUwMUpAdVNOPi86KlxaJys6VWcsVlNGNGwmNUZjYls5LS0nVlEqTl8mbSo7XlBGVW87KiNBOGkzLCJeJWk1cCRJcS5HP2BBYmopNTNySkFuXHBQW2taaHEuakNOUWA9RT8mPjcrPk9sLlRUT142cE1fZFBbOEgxT1pCW15PXGJrJlVAXSdCOGhXQ3RIQlktLGxkZFcjXnBKOTBMZTA3TiVUJUtvUmVkXWM5PmlFWD01aHQtbSQiKkNcdUJtdTpjVjU8Ukk3P1BlX04sQTtLcWZEX3EuRmQ5ViljIUkvL0BWTzZdKmViRENcImZlKlpVIVYuUVxKaW5LM25qN3A2TG5iOklFNDdnVTdaY2YyL08kSCQ3IzJ0SFQtQ3M/ZFhjT1ZQKHVhakFHL0R0SHUvdUxnWGIyYFFNXDNvNVw+SEBXPltfKThGKCw4ZVZvLjdMT0VSVTJoaDlbMktPN2JDU2trU15cXkdKSSxQSTFvNGA6PGlobWtOSigjQD8za1NSWWFsP3ViX0sjMFszayFaclNEb2s5Vkg3QSppNStacz9PJCRAJCUqaTw4Sic0U19iOVUhMz1eamBWRDNiaUJvUj8xbkZsXGVISU4jVlZlJDk0Z3FDWmNkYyg5JTNNV2dOOFU6clJAPiwjP1tTOC0nRlpAaT9OOCopaTM1byJMSkdWN1VQVClQPkxoKmpGN3N0JSdvJE8hPm5ePnJYNWQxSiNMckZMbyhjMWxEVmUmdHVCJldnZVsodSFfcGhfKSplUzg/W1ZJPHRyMFQ0TyNKVUFBZCooRzZGPSEoaS5URyRdQVRrPW1AKkpHLjwyJVpvOzluZlhpK0hlPiM1JzBTQm9pSUBIJFs2WSExT21WXmctRSlpbl4ybGU8TDVERUkhZzZ1bm5XR2pubkY3O15HK05EYHRxOCpMQi0ySClAdERQck1NOUxuRCFlQC1xTzs6Pk1mbj1wQldabz8wdT4qcjlKYlJeK3RUPURcNkk4Yyg+LSQrVTM/LD89VDxFYmheX086XyVyLzZvR10sWkMqQz0zI1s7S0wlR3AiN0xHJWJaUzY7WDgwbDIrcjAwS19gUjUmKXErUi9MQkVpYT5NWG5fU0czSEV1QTJLTjJwaktgRDRIRyNrInVLXypfI185b104VjUrNnA9KzdVYmI6a2lDTEl0Zlc5XklvYDllXkdxOlFAUiZhQTk2b15nbFghNDVUQTtkMTBASjZDQWYjVk5QL0wsWTxEamV1dEcnV2syJHFSNz5pU3UxNkFNZkNVYmlsQk5mTChqIUQpVjhzWzxXMjpiNVlpazFaQy1WV1pVTl5AbSUsSWNALSsjKUVfbUMwQCVgKjlWQUs0IkVHckdgLk1bKGUsbHIpT2VKJmpxOis+OyU0JydkSGpaaFJyPDcpSkVydUQsS1I3TzA7MkVSZ1tNMDtmLSg3LSZeTXNCR1UqPz1ST04rIzpPQzldM2JXayshUVc3YlluZnNnL2RRQWtBQTdzOkU3Uz0jRV5xPDFaKz5mU0g2XiJSaWRhMjY3LTJOL1UxZjRnPGB0KEk1V0syPGVOa2lgO0xOIzY7LmlmXFVAZC5fLFRwJk5aZVlmOFExV1FqZHBiM0ZURmpbWi9eSVAhK2lMR0RzQl1dZzdoQklNY05ScHM0L08vK0BcLDEuRHJLP0ZzNkFxbk4jVkU0KSJFR3JnVFAkZitaUkZMc2JsV2o3LTVxQ08qaGxOaWZGayRDQG5XJzUjYEBtZExDYiRbMVA2bUYpPEBjU0w+V0MqZCFtXkxkX2JCQTVac3ImUXVjISFhQ2cxdFI0cUJLTDE3PEIqZTllTmBEQ2dXJi86RStXNWovaEpnZDdGRGBPS3A4OVdBZEQjQnVqPGlzb3FONHVCb11DODlfRmsscnRTV19OPW9jZ0M4WDVBPilwISQyTy9zV2k8NV06aUUwViUiZF1CUGJXWCUjcU43PjcxUmcxNm0oOl9tZElgQTYwLSNyNEQ2JSMlPyFpVmpbSFIwZSdnaDRkYUM0TCRucVI/PDlvRy5QXTdSUkJRMGwlbUcyKkFPI1k4TkojaktXI2NhWF4iSWdVS0JSRklgLS5YLygyO2o3bUw0UUd0XV1wQDFUXm4xQzxUUyxfUCdvSUcuc0JUWWldJG44Kmw3TGVfR1NLWSVhSz1lWkdfKk1rUVRkPDdYYTJKT2J1Kks9T21EIzBpYGVoLDhlKmZTJF1JLjI5M0k1ZW5ZW3NFViY0bSZeX1chRCtcJUEzNCdKU0dXRyFOci1kbGw9WChZTi9kXjUjbVhzLkZvXV1cM2MmYWolQEorbShBUkNfKFFxVkJFZ21wMUlzT0g2Yzs1dTlmVSduQUleRklVQ2xPY1Q+V04yRWEjUTczTjMwUTtcYjstJ0FCL0s/PDQiWWJFJTFaOmxAJ2tIOyFlUyNqNCRRLCxIMDgzUUwuNEJpLDhzbUs2LktrcCxWLm5IPGksJGRXaWskXXFIYSZfUV9DKFRnbz0oS3BfNV0iL3VhbC9LU0YiYVo8XEoobG9PTyYyL3RKTk1FNFQzckRrXCdrcik9RHIpaF4/ckMoclMzPCZANS5QMl5WTEdValNKWCFyNGhtPz1lNUIsaVY/ckM/UkNWSmZuZzc3LytuaEdGMShyNGwlYV5IaFhrWzZhNTkpXGoyVUJGcnJAJXVdOlR+PmVuZHN0cmVhbQplbmRvYmoKeHJlZgowIDEwCjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDA2MSAwMDAwMCBuIAowMDAwMDAwMTEyIDAwMDAwIG4gCjAwMDAwMDAyMTkgMDAwMDAgbiAKMDAwMDAwMDMzMSAwMDAwMCBuIAowMDAwMDAwNDQ2IDAwMDAwIG4gCjAwMDAwMDA2NDkgMDAwMDAgbiAKMDAwMDAwMDcxNyAwMDAwMCBuIAowMDAwMDAwOTc4IDAwMDAwIG4gCjAwMDAwMDEwMzcgMDAwMDAgbiAKdHJhaWxlcgo8PAovSUQgCls8NmI2ZDNhZmEyMmUzMWJjNTI0OGVkMWM4NjNkOGM2Yzg+PDZiNmQzYWZhMjJlMzFiYzUyNDhlZDFjODYzZDhjNmM4Pl0KJSBSZXBvcnRMYWIgZ2VuZXJhdGVkIFBERiBkb2N1bWVudCAtLSBkaWdlc3QgKG9wZW5zb3VyY2UpCgovSW5mbyA3IDAgUgovUm9vdCA2IDAgUgovU2l6ZSAxMAo+PgpzdGFydHhyZWYKODUyMwolJUVPRgo=";
         document.getElementById("download-resume").addEventListener("click",function(){
             var bytes=new Uint8Array(atob(b64).split("").map(function(c){return c.charCodeAt(0);}));
             var blob=new Blob([bytes],{type:"application/pdf"});
